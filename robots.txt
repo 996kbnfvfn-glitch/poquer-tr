@@ -1,0 +1,6 @@
+# PokerMind · projecte educatiu sense ànim de lucre
+# Substituir 996kbnfvfn-glitch.github.io/poquer-tr pel domini real abans de publicar.
+User-agent: *
+Allow: /
+
+Sitemap: https://996kbnfvfn-glitch.github.io/poquer-tr/sitemap.xml

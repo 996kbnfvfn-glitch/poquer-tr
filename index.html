@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>PokerMind · El pòquer Texas Hold’em com a joc d’habilitat</title>
+<meta name="description" content="Història, regles, habilitats, psicologia i probabilitat del pòquer amb simuladors interactius. En català, castellà i anglès." />
+<meta name="author" content="PokerMind" />
+<meta property="og:title" content="PokerMind · El pòquer Texas Hold’em com a joc d’habilitat" />
+<meta property="og:description" content="Treball de recerca interactiu: probabilitat, estratègia i psicologia del Texas Hold’em, amb simulador de mans, calculadora d’equity i comparació amb el blackjack." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#080B18" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+
+<!-- PRODUCCIÓ · GitHub Pages
+     Substituïu USUARI i REPOSITORI per les dades reals del vostre repositori.
+     Afecta a: canonical, og:url, og:image i sitemap.xml.
+     Les adreces d'Open Graph han de ser absolutes perquè WhatsApp les llegeixi. -->
+<link rel="canonical" href="https://996kbnfvfn-glitch.github.io/poquer-tr/" />
+<meta property="og:url" content="https://996kbnfvfn-glitch.github.io/poquer-tr/" />
+<meta property="og:image" content="https://996kbnfvfn-glitch.github.io/poquer-tr/og.jpg" />
+<meta property="og:image:width" content="800" />
+<meta property="og:image:height" content="420" />
+<meta property="og:image:alt" content="PokerMind · Treball de Recerca sobre el pòquer Texas Hold’em" />
+<meta name="twitter:image" content="https://996kbnfvfn-glitch.github.io/poquer-tr/og.jpg" />
+<meta property="og:site_name" content="PokerMind" />
+<meta property="og:locale" content="ca_ES" />
+<meta property="og:locale:alternate" content="es_ES" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta name="twitter:title" content="PokerMind · El pòquer Texas Hold’em com a joc d’habilitat" />
+<meta name="twitter:description" content="Treball de recerca interactiu sobre probabilitat, estratègia i psicologia del pòquer." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="favicon.svg" />
+<link rel="stylesheet" href="styles.css" />
+
+<!-- Datos estructurados: curso educativo + FAQ (SEO) -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Course","name":"PokerMind · El pòquer Texas Hold’em com a joc d’habilitat",
+  "description":"Treball de recerca convertit en curs interactiu: origen del pòquer, regles del Texas Hold’em, probabilitat, estratègia i psicologia, amb simuladors de pòquer i blackjack.",
+  "inLanguage":["ca","es","en"],"educationalLevel":"Batxillerat",
+  "provider":{"@type":"Organization","name":"PokerMind"},
+  "hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"PT4H"},
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","category":"Free"}},
+ {"@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"Cada quantes mans es reben dos asos?",
+   "acceptedAnswer":{"@type":"Answer","text":"Aproximadament una vegada cada 221 mans, és a dir en un 0,45% dels casos."}},
+  {"@type":"Question","name":"Què és la regla del 2 i el 4?",
+   "acceptedAnswer":{"@type":"Answer","text":"Multiplicar els outs per 4 quan queden dues cartes i per 2 quan només queda el river dona la probabilitat aproximada de completar la jugada. Amb 9 outs de color: 9 × 4 = 36%."}},
+  {"@type":"Question","name":"Per què el pòquer es considera un joc d’habilitat i el blackjack no?",
+   "acceptedAnswer":{"@type":"Answer","text":"Al blackjack es juga contra la banca, que manté un avantatge matemàtic fix fins i tot jugant amb estratègia bàsica. Al pòquer es juga contra altres jugadors i el casino només cobra una comissió, de manera que qui pren millors decisions pot guanyar de manera constant a llarg termini."}}]}]}
+</script>
+
+<!-- Capa d'arrencada. L'estil va en linia i sense dependre de styles.css perque
+     ha de pintar-se al primer fotograma. Es retira quan React ha muntat. -->
+<style>
+  #pm-boot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;
+    background:#080B18;color:#F2F5FF;font-family:"Space Grotesk","Segoe UI",system-ui,sans-serif;
+    transition:opacity .5s ease,visibility .5s ease}
+  #pm-boot::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 70% 55% at 50% 42%,rgba(31,90,43,.30),transparent 70%)}
+  #pm-boot.is-done{opacity:0;visibility:hidden}
+  .boot-in{position:relative;display:grid;justify-items:center;gap:22px;padding:24px;text-align:center}
+
+  /* Cinc cartes que surten del mall i formen un ventall */
+  .boot-fan{position:relative;width:200px;height:96px}
+  .boot-fan i{position:absolute;left:50%;top:0;width:52px;height:74px;margin-left:-26px;border-radius:6px;
+    background:linear-gradient(140deg,#1F5A2B,#0C2211 62%,#17401F);
+    border:1px solid rgba(227,190,85,.30);box-shadow:0 10px 26px -12px rgba(0,0,0,.85);
+    transform-origin:50% 130%;opacity:0;animation:boot-deal 2.4s cubic-bezier(.22,.8,.3,1) infinite}
+  .boot-fan i::after{content:"";position:absolute;inset:6px;border-radius:3px;border:1px solid rgba(227,190,85,.16)}
+  .boot-fan i:nth-child(1){--dx:-64px;--rot:-22deg;animation-delay:0s}
+  .boot-fan i:nth-child(2){--dx:-33px;--rot:-11deg;animation-delay:.16s}
+  .boot-fan i:nth-child(3){--dx:0px;--rot:0deg;animation-delay:.32s}
+  .boot-fan i:nth-child(4){--dx:33px;--rot:11deg;animation-delay:.48s}
+  .boot-fan i:nth-child(5){--dx:64px;--rot:22deg;animation-delay:.64s}
+  @keyframes boot-deal{
+    0%{opacity:0;transform:translate(0,14px) rotate(0deg) scale(.92)}
+    14%{opacity:1}
+    46%,74%{opacity:1;transform:translate(var(--dx,0),0) rotate(var(--rot,0deg))}
+    100%{opacity:0;transform:translate(var(--dx,0),-10px) rotate(var(--rot,0deg)) scale(.98)}}
+
+  .boot-word{display:flex;align-items:center;gap:10px;font-size:1.5rem;font-weight:700;letter-spacing:-.03em}
+  .boot-pip{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;
+    background:linear-gradient(145deg,#F3D98C,#E3BE55);color:#0A0E27;font-size:1rem;
+    animation:boot-pulse 2.4s ease-in-out infinite}
+  @keyframes boot-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+  .boot-tag{font-family:Inter,system-ui,sans-serif;font-size:.86rem;color:#AFB8D0;max-width:30ch;line-height:1.5}
+  .boot-tag b{color:#E3BE55;font-weight:600}
+
+  .boot-meter{display:grid;gap:8px;width:min(74vw,260px)}
+  .boot-track{height:3px;border-radius:999px;background:rgba(175,184,208,.14);overflow:hidden}
+  .boot-fill{height:100%;width:2%;border-radius:999px;
+    background:linear-gradient(90deg,#8C6F1E,#E3BE55,#F3D98C);transition:width .28s cubic-bezier(.3,.7,.4,1)}
+  .boot-row{display:flex;justify-content:space-between;align-items:center;
+    font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.68rem;color:#565F7A;letter-spacing:.06em}
+
+  @media (prefers-color-scheme:light){
+    #pm-boot{background:#EEF0EC;color:#0F1720}
+    #pm-boot .boot-tag{color:#414D5C}
+    #pm-boot .boot-tag b{color:#8A6A11}
+    #pm-boot .boot-track{background:rgba(15,23,32,.12)}
+    #pm-boot .boot-row{color:#8B95A1}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #pm-boot .boot-fan i{animation:none;opacity:1;transform:translate(var(--dx,0),0) rotate(var(--rot,0deg))}
+    #pm-boot .boot-pip{animation:none}
+    #pm-boot{transition:none}
+  }
+</style>
+
+
+</head>
+
+<body>
+<div id="pm-boot" role="status" aria-live="polite" aria-label="Carregant PokerMind">
+  <div class="boot-in">
+    <div class="boot-fan" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="boot-word"><span class="boot-pip" aria-hidden="true">&#9824;</span>PokerMind</div>
+    <p class="boot-tag">Domina el P&#242;quer. <b>Domina la teva Ment.</b></p>
+    <div class="boot-meter">
+      <div class="boot-track"><div class="boot-fill" id="pm-boot-fill"></div></div>
+      <div class="boot-row"><span>Preparant la taula</span><span id="pm-boot-pct">0%</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Progres real d'arrencada: cada script marcat crida tick() al carregar-se.
+   TOTAL ha de coincidir amb el nombre d'aquests scripts (llista al final del fitxer).
+   Si el muntatge falla, un rellotge de seguretat retira la capa als 12 s perque el
+   contingut de reserva de #root quedi accessible igualment. */
+window.PMBOOT = (function () {
+  'use strict';
+  var TOTAL = 27, done = 0, finished = false, shown = 0;
+  var fill = document.getElementById('pm-boot-fill');
+  var pct  = document.getElementById('pm-boot-pct');
+  function paint(p) {
+    p = Math.max(shown, Math.min(1, p));          /* mai va enrere */
+    shown = p;
+    if (fill) fill.style.width = (p * 100).toFixed(0) + '%';
+    if (pct) pct.textContent = Math.round(p * 100) + '%';
+  }
+  var guard = setTimeout(function () { window.PMBOOT.done(); }, 12000);
+  return {
+    tick: function () { done++; paint(Math.min(0.94, done / TOTAL * 0.94)); },
+    done: function () {
+      if (finished) return;
+      finished = true;
+      clearTimeout(guard);
+      paint(1);
+      var el = document.getElementById('pm-boot');
+      if (!el) return;
+      setTimeout(function () {
+        el.classList.add('is-done');
+        setTimeout(function () { el.parentNode && el.parentNode.removeChild(el); }, 600);
+      }, 180);
+    }
+  };
+})();
+</script>
+
+<a class="skip" href="#root">Anar al contingut</a>
+<div id="root">
+  <!-- Estado inicial visible antes de que React monte (evita el flash en blanco) -->
+  <div style="min-height:60vh;display:grid;place-items:center;gap:18px;text-align:center;padding:60px 20px">
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:700;letter-spacing:-.03em">
+      Domina el Pòquer.<br /><span style="color:#D4AF37">Domina la teva Ment.</span>
+    </div>
+    <div style="color:#8B94B5">Preparant la taula…</div>
+  </div>
+</div>
+
+<!-- Sin runtime de CSS: la paleta y la tipografía viven en tokens CSS (styles.css),
+     que es lo que consume todo el marcado. Ver nota en el README sobre Tailwind. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js" crossorigin data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js" crossorigin data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js" crossorigin data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="core.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="consent.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="entrevista.data.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="content.ca.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="content.es.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="content.en.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="i18n.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="sim.i18n.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="bj.i18n.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="extras.i18n.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="entrevista.i18n.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="engine.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="holdem.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="blackjack.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="ui.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="ui2.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="icons.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="extras.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="sections.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="sections2.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="sim.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="bj.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="entrevista.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+<script src="app.js" data-boot onload="PMBOOT.tick()" onerror="PMBOOT.tick()"></script>
+</body>
+</html>

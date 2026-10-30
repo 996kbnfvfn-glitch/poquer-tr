@@ -1,0 +1,14 @@
+/* Hoja mínima para las páginas legales: hereda los tokens del sitio */
+@import url("../styles.css");
+.legal{width:min(100% - 2.5rem,780px);margin:0 auto;padding:var(--sp-7) 0 var(--sp-8)}
+.legal h1{font-size:var(--fs-h1);margin-bottom:var(--sp-3)}
+.legal h2{font-size:var(--fs-h2);margin:var(--sp-6) 0 var(--sp-3)}
+.legal p,.legal li{color:var(--ink-2);margin-bottom:var(--sp-3);line-height:1.65}
+.legal ul{padding-left:var(--sp-5)}
+.legal table{width:100%;border-collapse:collapse;font-size:var(--fs-small);margin:var(--sp-4) 0}
+.legal th{text-align:left;padding:var(--sp-2);border-bottom:1px solid var(--line);color:var(--ink-3);
+  font-family:var(--f-mono);font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.12em}
+.legal td{padding:var(--sp-2);border-bottom:1px solid var(--line);vertical-align:top}
+.legal .todo{background:var(--warn-wash);border-left:3px solid var(--warn);padding:var(--sp-3);border-radius:var(--r-sm);color:var(--ink)}
+.legal .back{display:inline-flex;gap:var(--sp-2);align-items:center;color:var(--gold);text-decoration:none;margin-bottom:var(--sp-5)}
+.legal .meta{font-size:var(--fs-caption);color:var(--ink-4)}

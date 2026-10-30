@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Substituir 996kbnfvfn-glitch.github.io/poquer-tr pel domini real. La web és d'una sola pàgina:
+     cada pestanya és un fragment (#), que els cercadors no indexen per separat.
+     Les pàgines legals sí són fitxers independents i s'indexen. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://996kbnfvfn-glitch.github.io/poquer-tr/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url><loc>https://996kbnfvfn-glitch.github.io/poquer-tr/legal/avis-legal.html</loc><priority>0.3</priority></url>
+  <url><loc>https://996kbnfvfn-glitch.github.io/poquer-tr/legal/privacitat.html</loc><priority>0.3</priority></url>
+  <url><loc>https://996kbnfvfn-glitch.github.io/poquer-tr/legal/cookies.html</loc><priority>0.3</priority></url>
+  <url><loc>https://996kbnfvfn-glitch.github.io/poquer-tr/legal/condicions.html</loc><priority>0.3</priority></url>
+</urlset>
